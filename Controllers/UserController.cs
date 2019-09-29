@@ -17,7 +17,32 @@ namespace user_parking_api.Controllers
 
         public UserController(DataContext context)
         {         
-            _dataContext = context;      
+            _dataContext = context;
+            var car = new Car {
+                IdCar = 1,
+                Model = "Ford T",
+                LicencePlate = "XYZ0001"
+            };
+            var user = new User {
+                Id = 1,
+                Name = "pepe",
+                Surname = "Uno",
+                Email = "pepe@mail.com",
+                Telephone = "555112233"
+
+            };
+            var userWithCar = new UserCar
+            {
+                IdUserCar = user.Id,
+                user = user,
+                car = car
+            };
+
+            _dataContext.users.Add(user);
+            _dataContext.cars.Add(car);
+
+
+
         }
 
         // GET api/user
@@ -68,11 +93,37 @@ namespace user_parking_api.Controllers
             return Ok(userWithCar);
         }
 
+
+        [HttpPost("name")]
+        public IActionResult getUserName([FromBody]string name)
+        {
+            if (!String.IsNullOrEmpty(name))
+            {
+                var userParking = _dataContext.users.FirstOrDefault(u => u.Name == name);
+                var carParking = _dataContext.cars.FirstOrDefault(c => c.IdCar == userParking.Id);
+                var userWithCar = new UserCar
+                {
+                    IdUserCar = userParking.Id,
+                    user = userParking,
+                    car = carParking
+                };
+
+                if (userWithCar == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(userWithCar);
+            }
+
+            return NoContent();
+        }
+
         // POST: api/user
         [HttpPost]
         public async Task<ActionResult> PostUserWithCar([FromBody]UserCar userCar)
         {
-            if (userCar == null)
+            if (userCar != null)
             {
 
 

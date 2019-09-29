@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using user_parking_api.Persistence;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.EntityFrameworkCore.Sqlite;
 
 
 namespace user_parking_api
@@ -35,7 +36,8 @@ namespace user_parking_api
                 c.SwaggerDoc("v1", new Info { Title = "Test User Parking API", Version = "v1" });
             });
             //services.AddDbContext<DataContext>(x => x.UseSqlite.(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("UserParking"));
+            services.AddDbContext<DataContext>(x => x.UseSqlite("Data Source=userParking.db"));
+            //services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("UserParking"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddCors();
