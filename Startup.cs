@@ -36,8 +36,8 @@ namespace user_parking_api
                 c.SwaggerDoc("v1", new Info { Title = "Test User Parking API", Version = "v1" });
             });
             //services.AddDbContext<DataContext>(x => x.UseSqlite.(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDbContext<DataContext>(x => x.UseSqlite("Data Source=userParking.db"));
-            //services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("UserParking"));
+            //services.AddDbContext<DataContext>(x => x.UseSqlite("Data Source=userParking.db"));
+            services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("UserParking"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddCors();
@@ -70,7 +70,7 @@ options.Filters.Add(new CorsAuthorizationFilterFactory("AllowMyOrigin"));
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Test User Parking API");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", " User-Parking API TEST");
             });
             //app.UseCors("AllowMyOrigin");
             app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowCredentials().AllowAnyHeader());

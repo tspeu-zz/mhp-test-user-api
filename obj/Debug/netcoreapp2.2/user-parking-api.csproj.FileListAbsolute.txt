@@ -3,7 +3,6 @@ C:\Users\jm_bchr\Documents\PROYECTOS\MHP-TEST\user-parking-api\bin\Debug\netcore
 C:\Users\jm_bchr\Documents\PROYECTOS\MHP-TEST\user-parking-api\bin\Debug\netcoreapp2.2\user-parking-api.runtimeconfig.dev.json
 C:\Users\jm_bchr\Documents\PROYECTOS\MHP-TEST\user-parking-api\bin\Debug\netcoreapp2.2\user-parking-api.dll
 C:\Users\jm_bchr\Documents\PROYECTOS\MHP-TEST\user-parking-api\bin\Debug\netcoreapp2.2\user-parking-api.pdb
-C:\Users\jm_bchr\Documents\PROYECTOS\MHP-TEST\user-parking-api\obj\Debug\netcoreapp2.2\user-parking-api.csprojAssemblyReference.cache
 C:\Users\jm_bchr\Documents\PROYECTOS\MHP-TEST\user-parking-api\obj\Debug\netcoreapp2.2\user-parking-api.csproj.CoreCompileInputs.cache
 C:\Users\jm_bchr\Documents\PROYECTOS\MHP-TEST\user-parking-api\obj\Debug\netcoreapp2.2\user-parking-api.RazorAssemblyInfo.cache
 C:\Users\jm_bchr\Documents\PROYECTOS\MHP-TEST\user-parking-api\obj\Debug\netcoreapp2.2\user-parking-api.RazorAssemblyInfo.cs
@@ -12,3 +11,4 @@ C:\Users\jm_bchr\Documents\PROYECTOS\MHP-TEST\user-parking-api\obj\Debug\netcore
 C:\Users\jm_bchr\Documents\PROYECTOS\MHP-TEST\user-parking-api\obj\Debug\netcoreapp2.2\user-parking-api.RazorTargetAssemblyInfo.cache
 C:\Users\jm_bchr\Documents\PROYECTOS\MHP-TEST\user-parking-api\obj\Debug\netcoreapp2.2\user-parking-api.dll
 C:\Users\jm_bchr\Documents\PROYECTOS\MHP-TEST\user-parking-api\obj\Debug\netcoreapp2.2\user-parking-api.pdb
+C:\Users\jm_bchr\Documents\PROYECTOS\MHP-TEST\user-parking-api\obj\Debug\netcoreapp2.2\user-parking-api.csprojAssemblyReference.cache

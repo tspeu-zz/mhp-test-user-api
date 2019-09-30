@@ -8,7 +8,7 @@ using user_parking_api.Persistence;
 namespace user_parking_api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190929032649_InitialCreate")]
+    [Migration("20190929033602_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

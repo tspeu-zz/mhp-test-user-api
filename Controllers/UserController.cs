@@ -18,31 +18,8 @@ namespace user_parking_api.Controllers
         public UserController(DataContext context)
         {         
             _dataContext = context;
-            var car = new Car {
-                IdCar = 1,
-                Model = "Ford T",
-                LicencePlate = "XYZ0001"
-            };
-            var user = new User {
-                Id = 1,
-                Name = "pepe",
-                Surname = "Uno",
-                Email = "pepe@mail.com",
-                Telephone = "555112233"
 
-            };
-            var userWithCar = new UserCar
-            {
-                IdUserCar = user.Id,
-                user = user,
-                car = car
-            };
-
-            _dataContext.users.Add(user);
-            _dataContext.cars.Add(car);
-
-
-
+             testData();
         }
 
         // GET api/user
@@ -93,13 +70,38 @@ namespace user_parking_api.Controllers
             return Ok(userWithCar);
         }
 
-
+        /*
         [HttpPost("name")]
         public IActionResult getUserName([FromBody]string name)
         {
             if (!String.IsNullOrEmpty(name))
             {
                 var userParking = _dataContext.users.FirstOrDefault(u => u.Name == name);
+                var carParking = _dataContext.cars.FirstOrDefault(c => c.IdCar == userParking.Id);
+                var userWithCar = new UserCar
+                {
+                    IdUserCar = userParking.Id,
+                    user = userParking,
+                    car = carParking
+                };
+
+                if (userWithCar == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(userWithCar);
+            }
+
+            return NoContent();
+        }
+        */
+        [HttpPost("email")]
+        public IActionResult getUserEmail([FromBody]string email)
+        {
+            if (!String.IsNullOrEmpty(email))
+            {
+                var userParking = _dataContext.users.FirstOrDefault(u => u.Email == email);
                 var carParking = _dataContext.cars.FirstOrDefault(c => c.IdCar == userParking.Id);
                 var userWithCar = new UserCar
                 {
@@ -156,20 +158,56 @@ namespace user_parking_api.Controllers
 
 
         }
-/*
-        [HttpPost("promotionalcode")]
-        public async Task<ActionResult<ResponseOk<bool>>> SendCouponNotifications(
-                    string portalCountryCode, string userCountryCode, 
-                    [FromBody]ContactNotificationDto contactNotificationDto)
-        {
-            ResponseOk<bool> response = new ResponseOk<bool>
+
+        // PUT api/values/5
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] string value)
+        //{
+        //    Console.Write(" put ");
+        //}
+
+        /**/
+        
+        public void  testData() {
+
+           var  user = new User
             {
-                Data = await _notificationService.SendCouponNotifications(portalCountryCode, userCountryCode, contactNotificationDto)
+                Name = "Pepe",
+                Surname = "Bueno",
+                Email = "pepe@mail.com",
+                Telephone = "5550001"
+            };
+            var car = new Car
+            {
+                Model = "Ford T",
+                LicencePlate = "ZYZ0001"
             };
 
-            return Ok(response);
+            _dataContext.Add(user);
+            _dataContext.Add(car);
+             _dataContext.SaveChangesAsync();
         }
-*/
+
+        /*
+         var newBrand = new CatalogBrand() { Brand = "Acme" };
+        _context.Add(newBrand);
+        await _context.SaveChangesAsync();*/
+
+
+        /*
+                [HttpPost("promotionalcode")]
+                public async Task<ActionResult<ResponseOk<bool>>> SendCouponNotifications(
+                            string portalCountryCode, string userCountryCode, 
+                            [FromBody]ContactNotificationDto contactNotificationDto)
+                {
+                    ResponseOk<bool> response = new ResponseOk<bool>
+                    {
+                        Data = await _notificationService.SendCouponNotifications(portalCountryCode, userCountryCode, contactNotificationDto)
+                    };
+
+                    return Ok(response);
+                }
+        */
 
     }
 }
