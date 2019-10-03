@@ -41,6 +41,7 @@ namespace user_parking_api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddCors();
+
             /*services.AddCors(options =>
             {
                 options.AddPolicy("AllowMyOrigin",
@@ -53,6 +54,7 @@ services.Configure<MvcOptions>(options =>
 {
 options.Filters.Add(new CorsAuthorizationFilterFactory("AllowMyOrigin"));
 });*/
+        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,7 +75,9 @@ options.Filters.Add(new CorsAuthorizationFilterFactory("AllowMyOrigin"));
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", " User-Parking API TEST");
             });
             //app.UseCors("AllowMyOrigin");
-            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowCredentials().AllowAnyHeader());
+            //app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowCredentials().AllowAnyHeader());
+            //app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            app.UseCors(builder => builder.WithOrigins("http://localhost:8100").AllowAnyHeader());
 
             app.UseHttpsRedirection();
             app.UseMvc();

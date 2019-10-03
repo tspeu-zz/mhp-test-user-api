@@ -82,7 +82,7 @@ namespace user_parking_api.Controllers
             return Ok(userWithCar);
         }
 
-        /*
+        
         [HttpPost("name")]
         public IActionResult getUserName([FromBody]string name)
         {
@@ -107,7 +107,9 @@ namespace user_parking_api.Controllers
 
             return NoContent();
         }
-        */
+        
+        //[HttpPost("email")]
+        //[HttpPost("product/{id:int}")]
         [HttpPost("email")]
         public IActionResult getUserEmail([FromBody]string email)
         {
