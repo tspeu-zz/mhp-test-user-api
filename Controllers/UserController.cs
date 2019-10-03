@@ -2,24 +2,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using user_parking_api.Models;
 using user_parking_api.Persistence;
+using user_parking_api.Utils;
 
 namespace user_parking_api.Controllers
 {
+        
+
+
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
+       
+        private readonly Tools _tools;
+        bool onlyOneMoockData = true;
+
         private readonly DataContext _dataContext;
+
+       
 
         public UserController(DataContext context)
         {         
             _dataContext = context;
 
-             testData();
+            //if (onlyOneMoockData) {
+            // moockInitData();
+            //}
         }
 
         // GET api/user
@@ -37,18 +48,19 @@ namespace user_parking_api.Controllers
                 userWithCar.IdUserCar = u.Id;
                 userWithCar.user = u;
 
-                cars.ForEach(c => 
+            });
+
+            cars.ForEach(c => 
                 {
-                    if (c.IdCar == u.Id)
+                    if (c.IdCar == userWithCar.IdUserCar)
                     {
                         userWithCar.car = c;
                     }
                 });
 
-                userWithCarsList.Add(userWithCar);
-            });
+            userWithCarsList.Add(userWithCar);
           
-            return Ok(userWithCar);
+            return Ok(userWithCarsList);
         }
 
         // GET api/user/5
@@ -168,24 +180,28 @@ namespace user_parking_api.Controllers
 
         /**/
         
-        public void  testData() {
-
-           var  user = new User
+        public void moockInitData() {
+            Random random = new Random();
+            var tel=  random.Next(1000000, 9999999);
+            var matricula = random.Next(1000, 9999);
+            var emailNum = random.Next(1, 99);
+            var  user = new User
             {
                 Name = "Pepe",
                 Surname = "Bueno",
-                Email = "pepe@mail.com",
-                Telephone = "5550001"
+                Email = "pepe" + emailNum.ToString() + "@mail.com",
+                Telephone = tel.ToString()
             };
             var car = new Car
             {
                 Model = "Ford T",
-                LicencePlate = "ZYZ0001"
+                LicencePlate = matricula.ToString()
             };
 
             _dataContext.Add(user);
             _dataContext.Add(car);
              _dataContext.SaveChangesAsync();
+            onlyOneMoockData = false;
         }
 
         /*
