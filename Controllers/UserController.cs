@@ -40,25 +40,25 @@ namespace user_parking_api.Controllers
             List<User> users = _dataContext.users.ToList();
             List<Car> cars = _dataContext.cars.ToList();
 
-            UserCar userWithCar = new UserCar { };
-            List<UserCar> userWithCarsList = new List<UserCar>();
+            //UserCar userWithCar = new UserCar { };
+            List<UserCar> userWithCarsList = _dataContext.userscars.ToList();
 
-            users.ForEach(u => 
-            {
-                userWithCar.IdUserCar = u.Id;
-                userWithCar.user = u;
+            //users.ForEach(u => 
+            //{
+            //    userWithCar.IdUserCar = u.Id;
+            //    userWithCar.user = u;
+            //    userWithCarsList.Add(userWithCar);
+            //});
 
-            });
+            //cars.ForEach(c => 
+            //    {
+            //        if (c.IdCar == userWithCar.IdUserCar)
+            //        {
+            //            userWithCar.car = c;
+            //        }
+            //    });
 
-            cars.ForEach(c => 
-                {
-                    if (c.IdCar == userWithCar.IdUserCar)
-                    {
-                        userWithCar.car = c;
-                    }
-                });
-
-            userWithCarsList.Add(userWithCar);
+            //userWithCarsList.Add(userWithCar);
           
             return Ok(userWithCarsList);
         }
@@ -139,7 +139,7 @@ namespace user_parking_api.Controllers
         {
             if (userCar != null)
             {
-
+                 
 
                 User user = new User
                 {
@@ -154,8 +154,14 @@ namespace user_parking_api.Controllers
                     LicencePlate = userCar.car.LicencePlate
                 };
 
+                UserCar userCarData = new UserCar {
+                    IdUserCar = user.Id,
+                    car = car,
+                    user = user
+                };
                 _dataContext.users.Add(user);
                 _dataContext.cars.Add(car);
+                _dataContext.userscars.Add(userCarData);
 
                 await _dataContext.SaveChangesAsync();
 

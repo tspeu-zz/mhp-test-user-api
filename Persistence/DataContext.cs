@@ -17,7 +17,7 @@ namespace user_parking_api.Persistence
 
         public DbSet<User> users { get; set; }
         public DbSet<Car> cars { get; set; }
-        //public DbSet<UserCar> userscars { get; set; }
+        public DbSet<UserCar> userscars { get; set; }
 
         /*
          var newBrand = new CatalogBrand() { Brand = "Acme" };
