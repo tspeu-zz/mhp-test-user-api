@@ -29,7 +29,7 @@ namespace user_parking_api.Controllers
             _dataContext = context;
 
             //if (onlyOneMoockData) {
-            // moockInitData();
+             moockInitData();
             //}
         }
 
@@ -108,28 +108,67 @@ namespace user_parking_api.Controllers
             return NoContent();
         }
         
-        //[HttpPost("email")]
-        //[HttpPost("product/{id:int}")]
+       
         [HttpPost("email")]
-        public IActionResult getUserEmail([FromBody]string email)
+        public  IActionResult getUserEmail([FromBody]string email)
         {
             if (!String.IsNullOrEmpty(email))
             {
+               
                 var userParking = _dataContext.users.FirstOrDefault(u => u.Email == email);
-                var carParking = _dataContext.cars.FirstOrDefault(c => c.IdCar == userParking.Id);
-                var userWithCar = new UserCar
+                if (userParking != null)
                 {
-                    IdUserCar = userParking.Id,
-                    user = userParking,
-                    car = carParking
-                };
 
-                if (userWithCar == null)
-                {
-                    return NotFound();
+                    var carParking = _dataContext.cars.FirstOrDefault(c => c.IdCar == userParking.Id);
+
+                    var userWithCar = new UserCar
+                    {
+                        IdUserCar = userParking.Id,
+                        user = userParking,
+                        car = carParking
+                    };
+
+                    if (userWithCar == null)
+                    {
+                        return NotFound();
+                    }
+
+                    _dataContext.users.Add(userParking);
+                    _dataContext.cars.Add(carParking);
+                    _dataContext.userscars.Add(userWithCar);
+
+                     _dataContext.SaveChangesAsync();
+
+                    return Ok(userWithCar);
                 }
+                else {
 
-                return Ok(userWithCar);
+                    var userParkingNew = new User {
+                        Name= "",
+                        Surname = "",
+                        Email= email,
+                        Id = 1,
+                        Telephone = ""
+                    };
+                    var carParkingNew = new Car {
+                        IdCar = 1,
+                        LicencePlate = "",
+                        Model = ""
+                    };
+                    var userWithCarNew = new UserCar {
+                            IdUserCar = 1,
+                            car = carParkingNew,
+                            user = userParkingNew
+                    };
+
+                    _dataContext.users.Add(userParkingNew);
+                    _dataContext.cars.Add(carParkingNew);
+                    _dataContext.userscars.Add(userWithCarNew);
+
+                     _dataContext.SaveChangesAsync();
+
+                    return Ok(userWithCarNew);
+                }
             }
 
             return NoContent();
