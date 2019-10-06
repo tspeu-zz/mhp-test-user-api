@@ -33,6 +33,9 @@ namespace user_parking_api.Controllers
             //}
         }
 
+        /// <summary>
+        /// </summary>
+        /// <returns>List<UserCar></returns>
         // GET api/user
         [HttpGet]
         public IActionResult GetUsers()
@@ -63,6 +66,10 @@ namespace user_parking_api.Controllers
             return Ok(userWithCarsList);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param id="id"></param>
+        /// <returns>UserCar</returns>
         // GET api/user/5
         [HttpGet("{id}")]
         public IActionResult getUser(int id)
@@ -82,7 +89,10 @@ namespace user_parking_api.Controllers
             return Ok(userWithCar);
         }
 
-        
+        /// <summary>
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>UserCar</returns>
         [HttpPost("name")]
         public IActionResult getUserName([FromBody]string name)
         {
@@ -107,8 +117,11 @@ namespace user_parking_api.Controllers
 
             return NoContent();
         }
-        
-       
+
+        /// <summary>
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>UserCar</returns>
         [HttpPost("email")]
         public  IActionResult getUserEmail([FromBody]string email)
         {
@@ -174,6 +187,9 @@ namespace user_parking_api.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param UserCar></param>
         // POST: api/user
         [HttpPost]
         public async Task<ActionResult> PostUserWithCar([FromBody]UserCar userCar)
@@ -250,27 +266,6 @@ namespace user_parking_api.Controllers
              _dataContext.SaveChangesAsync();
             onlyOneMoockData = false;
         }
-
-        /*
-         var newBrand = new CatalogBrand() { Brand = "Acme" };
-        _context.Add(newBrand);
-        await _context.SaveChangesAsync();*/
-
-
-        /*
-                [HttpPost("promotionalcode")]
-                public async Task<ActionResult<ResponseOk<bool>>> SendCouponNotifications(
-                            string portalCountryCode, string userCountryCode, 
-                            [FromBody]ContactNotificationDto contactNotificationDto)
-                {
-                    ResponseOk<bool> response = new ResponseOk<bool>
-                    {
-                        Data = await _notificationService.SendCouponNotifications(portalCountryCode, userCountryCode, contactNotificationDto)
-                    };
-
-                    return Ok(response);
-                }
-        */
 
     }
 }

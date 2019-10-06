@@ -19,10 +19,6 @@ namespace user_parking_api.Persistence
         public DbSet<Car> cars { get; set; }
         public DbSet<UserCar> userscars { get; set; }
 
-        /*
-         var newBrand = new CatalogBrand() { Brand = "Acme" };
-        _context.Add(newBrand);
-        await _context.SaveChangesAsync();*/
 
     }
 }
